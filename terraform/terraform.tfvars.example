@@ -1,0 +1,22 @@
+# Copy to terraform.tfvars and edit as needed.
+
+aws_region   = "us-east-2"
+project_name = "mvecc-home"
+
+# Leave unset — Terraform tags the image with a hash of your sources.
+# Set it to an older tag only to roll back.
+# image_tag = "a1b2c3d4e5f6"
+
+# Uncomment to trim cost below the 1 vCPU / 2 GB default.
+# cpu    = "0.5"
+# memory = "1"
+
+# Custom domain. The hosted zone must already exist in this account.
+domain_name    = "mvecc.dev"
+domain_aliases = ["www.mvecc.dev"]
+
+# Set only when the site lives on a subdomain rather than the zone apex.
+# hosted_zone_name = "mvecc.dev"
+
+# PriceClass_100 (NA + EU) is cheapest; PriceClass_All adds the rest.
+# cloudfront_price_class = "PriceClass_100"
