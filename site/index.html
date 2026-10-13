@@ -6,115 +6,14 @@
     <title>Michael Vecchione</title>
     <meta name="description" content="Personal site of Michael Vecchione." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
-      :root {
-        --bg: #fbfaf8;
-        --fg: #1c1b19;
-        --muted: #6b6862;
-        --rule: #e4e0d9;
-        --accent: #9a5b34;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg: #14140f;
-          --fg: #eceae4;
-          --muted: #98948c;
-          --rule: #2c2b26;
-          --accent: #d99a6c;
-        }
-      }
-
-      *, *::before, *::after { box-sizing: border-box; }
-
-      html, body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--fg);
-      }
-
-      body {
-        font-family: ui-serif, Georgia, "Times New Roman", serif;
-        font-size: 17px;
-        line-height: 1.65;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      .page {
-        max-width: 40rem;
-        margin: 0 auto;
-        padding: clamp(3rem, 10vw, 6rem) 1.5rem 4rem;
-      }
-
-      .header { margin-bottom: 3rem; }
-
-      .name {
-        font-size: clamp(2rem, 6vw, 2.75rem);
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-        margin: 0;
-      }
-
-      .tagline {
-        margin: 0.75rem 0 0;
-        color: var(--muted);
-        font-size: 1.05rem;
-      }
-
-      .section {
-        margin-top: 2.75rem;
-        padding-top: 2rem;
-        border-top: 1px solid var(--rule);
-      }
-
-      .section-title {
-        font-family: ui-sans-serif, system-ui, sans-serif;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin: 0 0 1rem;
-      }
-
-      .prose { margin: 0 0 1.1rem; }
-      .prose:last-child { margin-bottom: 0; }
-
-      .list {
-        margin: 0;
-        padding-left: 1.1rem;
-      }
-      .list li { margin-bottom: 0.4rem; }
-
-      .links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.25rem;
-      }
-
-      a {
-        color: var(--accent);
-        text-decoration: none;
-        border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
-        padding-bottom: 1px;
-      }
-      a:hover { border-bottom-color: var(--accent); }
-
-      .footer {
-        margin-top: 3.5rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--rule);
-        font-family: ui-sans-serif, system-ui, sans-serif;
-        font-size: 0.8rem;
-        color: var(--muted);
-      }
-    </style>
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <main class="page">
       <header class="header">
         <h1 class="name">Michael Vecchione</h1>
         <p class="tagline">There are times when we choose our challenges, and there are times when our challenges simply choose us. It's what we do in the face of those challenges that defines who we are and what we become.</p>
+        <p class="attribution">— Travis Roy</p>
       </header>
 
       <!--
@@ -130,6 +29,14 @@
           <ul class="list"><li>…</li></ul>
         </section>
       -->
+
+      <section class="section">
+        <h2 class="section-title">Writing</h2>
+        <nav class="links">
+          <a>Blog</a>
+          <!-- <a href="/blog/">Blog</a> -->
+        </nav>
+      </section>
 
       <section class="section">
         <h2 class="section-title">Elsewhere</h2>

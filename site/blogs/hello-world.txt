@@ -1,0 +1,10 @@
+Hello, world
+2026-10-13
+
+This is the first post. Every .txt file in site/blogs becomes its own page,
+and terraform apply adds it to the list on the blog page.
+
+The first line is the title and the second is the date. After a blank line,
+everything else is the post. Leave a blank line between paragraphs.
+
+Links like https://github.com/mvecchione145 become clickable on their own.

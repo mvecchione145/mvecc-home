@@ -3,8 +3,9 @@
 # and no S3 website endpoint.
 
 locals {
-  site_root  = abspath("${path.module}/../site")
-  site_files = fileset(local.site_root, "**")
+  site_root = abspath("${path.module}/../site")
+  # site/blogs/ holds post sources; blog.tf renders and uploads those.
+  site_files = toset([for f in fileset(local.site_root, "**") : f if !startswith(f, "blogs/")])
 
   # S3 serves whatever Content-Type the object was uploaded with, so it has to
   # be set per file. Add an entry here before adding a new kind of file.

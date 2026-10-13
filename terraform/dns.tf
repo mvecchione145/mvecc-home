@@ -63,6 +63,16 @@ data "aws_cloudfront_cache_policy" "optimized" {
   name = "Managed-CachingOptimized"
 }
 
+# default_root_object only covers "/", so this maps /blog/ to
+# /blog/index.html, and redirects /blog to /blog/ so relative links resolve.
+resource "aws_cloudfront_function" "pretty_urls" {
+  name    = "${var.project_name}-pretty-urls"
+  comment = "Serve index.html for directory URLs."
+  runtime = "cloudfront-js-2.0"
+  publish = true
+  code    = file("${path.module}/functions/pretty-urls.js")
+}
+
 resource "aws_cloudfront_distribution" "site" {
   enabled             = true
   is_ipv6_enabled     = true
@@ -84,14 +94,19 @@ resource "aws_cloudfront_distribution" "site" {
     cached_methods         = ["GET", "HEAD"]
     compress               = true
     cache_policy_id        = data.aws_cloudfront_cache_policy.optimized.id
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.pretty_urls.arn
+    }
   }
 
   # With no s3:ListBucket grant, S3 answers a missing key with 403 rather than
-  # 404. Answer it with the home page and a real 404 status.
+  # 404. Answer it with the not-found page and a real 404 status.
   custom_error_response {
     error_code            = 403
     response_code         = 404
-    response_page_path    = "/index.html"
+    response_page_path    = "/404.html"
     error_caching_min_ttl = 300
   }
 

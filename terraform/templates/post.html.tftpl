@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${title} · Michael Vecchione</title>
+    <meta name="description" content="${description}" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <nav class="crumbs"><a href="/">Michael Vecchione</a><span>/</span><a href="/blog/">Blog</a></nav>
+
+      <article>
+        <header>
+          <h1 class="post-title">${title}</h1>
+          <time class="post-date" datetime="${date}">${date_human}</time>
+        </header>
+
+        <div class="post-body">
+%{ for paragraph in paragraphs ~}
+          <p class="prose">${paragraph}</p>
+%{ endfor ~}
+        </div>
+      </article>
+
+      <footer class="footer">
+        <span><span id="year">2026</span> Michael Vecchione</span>
+      </footer>
+    </main>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear()
+    </script>
+  </body>
+</html>
