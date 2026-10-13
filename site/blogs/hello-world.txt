@@ -1,10 +1,8 @@
 Hello, world
 2026-10-13
 
-This is the first post. Every .txt file in site/blogs becomes its own page,
-and terraform apply adds it to the list on the blog page.
+You have the gift of being introspective and deciding your identity. Identity is a difficult thing to change but it commands great power over your actions. If waking up early is something you want to do, you can help yourself with your phrasing. When you say "I am just not a morning person" you assert that you are behaving within the role you chose when you don't wake up early, therefore cementing your identity as "not a morning person". You need to start saying "I have had trouble waking up early, but I would like to"; then you are stating that your identity is shifting. This will not make waking up early easier, but it will make giving up on that endeavor much more difficult.
 
-The first line is the title and the second is the date. After a blank line,
-everything else is the post. Leave a blank line between paragraphs.
+Parenting is the hardest thing I have ever had to do. I can always think of appropriate responses to my kids' behavior upon reflection; the problem is my responses are usually reactions. The 'solutions' I have found are perspective and gratitude. My perspective needs to be deliberate and constant: "I love my children and they deserve the best parenting I can offer". My gratitude needs to be held close: "I am so thankful for the opportunity to parent my children". These two in tandem allow for my responses to be thoughtful, patient and kind.
 
-Links like https://github.com/mvecchione145 become clickable on their own.
+To that point, if we start each day reminding ourselves that "we have the privilege of parenting wonderful children and they deserve the best version of us", then we will shape our identities: thoughtful, patient and kind parents.
