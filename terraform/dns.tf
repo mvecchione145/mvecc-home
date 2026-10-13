@@ -1,27 +1,7 @@
-# Custom domain for the site.
-#
-# Why CloudFront instead of pointing Route 53 straight at the Express Mode ALB:
-# Express Mode owns its load balancer. Its HTTPS listener routes on a
-# host-header rule that only matches the generated *.on.aws name, and its
-# canary deployments swap the service between a primary and an alternate
-# target group on every rollout. A hand-written listener rule for mvecc.dev
-# would therefore point at a drained target group after each deploy, and the
-# ALB certificate only covers *.on.aws.
-#
-# Fronting the service with CloudFront sidesteps all of that. CloudFront sends
-# the *origin's* hostname in the Host header (the managed cache policy does not
-# forward the viewer's), so Express Mode's own host-header rule keeps matching
-# and keeps working across deployments. Every resource here is owned by this
-# configuration, and static assets get edge caching for free.
+# Custom domain for the site: an ACM certificate, a CloudFront distribution in
+# front of the S3 bucket in site.tf, and Route 53 aliases for each name.
 
 locals {
-  # ingress_paths[0].endpoint may be a bare hostname or a full URL; CloudFront
-  # origins take a hostname only.
-  origin_host = regex(
-    "^(?:https?://)?([^/]+)/?$",
-    aws_ecs_express_gateway_service.site.ingress_paths[0].endpoint,
-  )[0]
-
   # The apex plus any extra names, e.g. www.
   site_domains = toset(concat([var.domain_name], var.domain_aliases))
 
@@ -78,8 +58,7 @@ resource "aws_acm_certificate_validation" "site" {
   validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
 }
 
-# Caches by URL only and forwards no cookies, headers, or query strings, which
-# is what keeps the origin Host header set to the .on.aws name.
+# Caches by URL only and honors the Cache-Control set on each S3 object.
 data "aws_cloudfront_cache_policy" "optimized" {
   name = "Managed-CachingOptimized"
 }
@@ -93,24 +72,27 @@ resource "aws_cloudfront_distribution" "site" {
   aliases             = local.site_domains
 
   origin {
-    domain_name = local.origin_host
-    origin_id   = "express-mode"
-
-    custom_origin_config {
-      http_port              = 80
-      https_port             = 443
-      origin_protocol_policy = "https-only"
-      origin_ssl_protocols   = ["TLSv1.2"]
-    }
+    domain_name              = aws_s3_bucket.site.bucket_regional_domain_name
+    origin_id                = "s3-site"
+    origin_access_control_id = aws_cloudfront_origin_access_control.site.id
   }
 
   default_cache_behavior {
-    target_origin_id       = "express-mode"
+    target_origin_id       = "s3-site"
     viewer_protocol_policy = "redirect-to-https"
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
     cached_methods         = ["GET", "HEAD"]
     compress               = true
     cache_policy_id        = data.aws_cloudfront_cache_policy.optimized.id
+  }
+
+  # With no s3:ListBucket grant, S3 answers a missing key with 403 rather than
+  # 404. Answer it with the home page and a real 404 status.
+  custom_error_response {
+    error_code            = 403
+    response_code         = 404
+    response_page_path    = "/index.html"
+    error_caching_min_ttl = 300
   }
 
   restrictions {
