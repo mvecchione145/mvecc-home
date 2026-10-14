@@ -151,3 +151,37 @@ a:hover { border-bottom-color: var(--accent); }
 
 .post-body { margin-top: 2rem; }
 .post-body a { overflow-wrap: anywhere; }
+
+/* Game */
+
+.scoreboard {
+  display: flex;
+  gap: 1.5rem;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.scoreboard strong { color: var(--fg); font-weight: 600; }
+
+.board {
+  display: block;
+  /* Fit the whole board on screen; arrow keys can't scroll during play. */
+  width: min(100%, max(16rem, calc(100vh - 19rem)));
+  aspect-ratio: 1 / 1;
+  margin: 1.5rem auto 0;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  /* Swipes steer the snake instead of scrolling the page. */
+  touch-action: none;
+  cursor: pointer;
+}
+
+.game-message {
+  min-height: 1.65em;
+  margin: 0.75rem 0 0;
+  text-align: center;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+}

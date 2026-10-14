@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake · Michael Vecchione</title>
+    <meta name="description" content="A small game of Snake." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <nav class="crumbs"><a href="/">Michael Vecchione</a><span>/</span>Snake</nav>
+
+      <header>
+        <h1 class="post-title">Snake</h1>
+        <div class="scoreboard">
+          <span>Score <strong id="score">0</strong></span>
+          <span>Best <strong id="best">0</strong></span>
+        </div>
+      </header>
+
+      <canvas id="board" class="board" aria-label="Snake game board"></canvas>
+      <p id="message" class="game-message" aria-live="polite"></p>
+
+      <footer class="footer">
+        <span><span id="year">2026</span> Michael Vecchione</span>
+      </footer>
+    </main>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear()
+    </script>
+    <script src="/game/snake.js"></script>
+  </body>
+</html>
